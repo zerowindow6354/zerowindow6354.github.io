@@ -26,6 +26,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap; 
         }
 
         .logo {
@@ -45,6 +46,16 @@
             border-radius: 3px;
         }
 
+        .burger-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
         .container {
             display: flex;
             max-width: 1200px;
@@ -56,6 +67,7 @@
         aside {
             width: 220px;
             flex-shrink: 0;
+            transition: all 0.3s ease;
         }
 
         .menu-title {
@@ -96,6 +108,7 @@
 
         main {
             flex-grow: 1;
+            width: 100%;
         }
 
         .catalog-title {
@@ -197,17 +210,63 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .burger-btn {
+                display: block; 
+                order: 2;
+            }
+
+            .logo {
+                order: 1;
+            }
+
+            .top-notice {
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+                text-align: center;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            aside {
+                width: 100%;
+                display: none;
+                margin-bottom: 15px;
+            }
+
+            aside.active {
+                display: block; 
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); 
+            }
+
+            .product-desc {
+                min-height: auto; 
+            }
+        }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">ZERODAY // MARKET</div>
+        <button class="burger-btn" id="burger-btn">☰</button>
         <div class="top-notice">Работаем 24/7. По всем вопросам писать оператору.</div>
     </header>
 
     <div class="container">
-        <aside>
+        <aside id="sidebar">
             <div class="menu-title">Категории</div>
             <ul class="menu-list">
                 <li><a class="menu-link active" data-category="all">Все товары</a></li>
@@ -374,6 +433,7 @@
                 </div>
 
             </div>
+
         </main>
     </div>
 
@@ -387,6 +447,13 @@
             const menuLinks = document.querySelectorAll('.menu-link');
             const products = document.querySelectorAll('.product-card');
             const catalogTitle = document.getElementById('catalog-title');
+            
+            const burgerBtn = document.getElementById('burger-btn');
+            const sidebar = document.getElementById('sidebar');
+
+            burgerBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
 
             menuLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -398,6 +465,10 @@
                     const selectedCategory = link.getAttribute('data-category');
                     
                     catalogTitle.textContent = link.textContent;
+
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                    }
 
                     products.forEach(product => {
                         const productCategory = product.getAttribute('data-cat');
