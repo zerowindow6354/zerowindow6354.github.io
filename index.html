@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZERODAY // Официальное зеркало</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-size: 14px;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            border-bottom: 1px solid #2d2d2d;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .top-notice {
+            font-size: 12px;
+            color: #888;
+            background: #222;
+            padding: 5px 10px;
+            border: 1px solid #333;
+            border-radius: 3px;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+            gap: 20px;
+        }
+
+        aside {
+            width: 220px;
+            flex-shrink: 0;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-list {
+            list-style: none;
+            background: #1a1a1a;
+            border: 1px solid #2d2d2d;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .menu-list li a {
+            display: block;
+            padding: 10px 15px;
+            color: #aaa;
+            text-decoration: none;
+            border-bottom: 1px solid #2d2d2d;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .menu-list li:last-child a {
+            border-bottom: none;
+        }
+
+        .menu-list li a:hover, .menu-list li a.active {
+            background: #252525;
+            color: #fff;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        .catalog-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #fff;
+            border-bottom: 1px solid #2d2d2d;
+            padding-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 15px;
+        }
+
+        .product-card {
+            background: #1a1a1a;
+            border: 1px solid #2d2d2d;
+            border-radius: 4px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: opacity 0.2s ease;
+        }
+
+        .product-card.hidden {
+            display: none !important;
+        }
+
+        .product-card:hover {
+            border-color: #444;
+        }
+
+        .product-name {
+            font-size: 15px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            font-size: 12px;
+            color: #999;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            min-height: 50px;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid #252525;
+        }
+
+        .product-price {
+            font-size: 15px;
+            font-weight: bold;
+            color: #5cb85c;
+        }
+
+        .order-btn {
+            background: #333;
+            color: #fff;
+            padding: 6px 12px;
+            text-decoration: none;
+            font-size: 12px;
+            border-radius: 3px;
+            border: 1px solid #444;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .order-btn:hover {
+            background: #0076a3;
+            border-color: #0088cc;
+        }
+
+        footer {
+            background: #1a1a1a;
+            border-top: 1px solid #2d2d2d;
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        footer a {
+            color: #0088cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">ZERODAY // MARKET</div>
+        <div class="top-notice">Работаем 24/7. По всем вопросам писать оператору.</div>
+    </header>
+
+    <div class="container">
+        <aside>
+            <div class="menu-title">Категории</div>
+            <ul class="menu-list">
+                <li><a class="menu-link active" data-category="all">Все товары</a></li>
+                <li><a class="menu-link" data-category="manuals">Документы / Мануалы</a></li>
+                <li><a class="menu-link" data-category="databases">Базы данных</a></li>
+                <li><a class="menu-link" data-category="verif">Верификации / Активации</a></li>
+                <li><a class="menu-link" data-category="software">Софт / Скрипты</a></li>
+                <li><a class="menu-link" data-category="logs">Логи / Аккаунты</a></li>
+            </ul>
+        </aside>
+
+        <!-- Основная витрина -->
+        <main>
+            <div class="catalog-title" id="catalog-title">Все товары</div>
+            
+            <div class="grid">
+                
+                <!-- МАНУАЛЫ -->
+                <div class="product-card" data-cat="manuals">
+                    <div>
+                        <div class="product-name">Приватный мануал анонимности</div>
+                        <div class="product-desc">Актуальный способ настройки систем под максимальный делект. С софтом.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">45 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <div class="product-card" data-cat="manuals">
+                    <div>
+                        <div class="product-name">Схема обхода антифрод систем</div>
+                        <div class="product-desc">Пошаговое руководство по прогреву и работе со сложными мерчантами.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">60 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <!-- ВЕРИФЫ -->
+                <div class="product-card" data-cat="verif">
+                    <div>
+                        <div class="product-name">SimCard</div>
+                        <div class="product-desc">Пошаговое руководство по прогреву и верификации.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">от 4 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <div class="product-card" data-cat="verif">
+                    <div>
+                        <div class="product-name">SimCard</div>
+                        <div class="product-desc">Активация - делаем все сами и отдаем симку.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">от 8 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <div class="product-card" data-cat="verif">
+                    <div>
+                        <div class="product-name">Сrypto Exchanges</div>
+                        <div class="product-desc">Верификация.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">от 5 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <div class="product-card" data-cat="verif">
+                    <div>
+                        <div class="product-name">Карты</div>
+                        <div class="product-desc">Личные кабинеты.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">от 40 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <!-- ЛОГИ -->
+                <div class="product-card" data-cat="logs">
+                    <div>
+                        <div class="product-name">Свежие логи (MIX)</div>
+                        <div class="product-desc">Сортированные логи под крипту и запросы. Выдача строго в одни руки.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">15 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <div class="product-card" data-cat="logs">
+                    <div>
+                        <div class="product-name">Tdata/session Telegram (fish)</div>
+                        <div class="product-desc">Доступ к аккаунтам с масштабной рыбалки. Продаются зипками по 25 шт. Страна только СНГ</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">10 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <div class="product-card" data-cat="logs">
+                    <div>
+                        <div class="product-name">Крипто-логи (High Balance)</div>
+                        <div class="product-desc">Логи с холодными кошельками и биржами. Проверены только на наличие баланса.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">70 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <!-- СОФТ -->
+                <div class="product-card" data-cat="software">
+                    <div>
+                        <div class="product-name">Заказ DDOS/DOS программы</div>
+                        <div class="product-desc">C++, Python, JS. Полностью чистый код, простая настройка.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">120 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <div class="product-card" data-cat="software">
+                    <div>
+                        <div class="product-name">Брут/Чекер сервисов</div>
+                        <div class="product-desc">Многопоточный софт с поддержкой любых прокси. Высокая скорость работы.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">50 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <!-- БАЗЫ ДАННЫХ -->
+                <div class="product-card" data-cat="databases">
+                    <div>
+                        <div class="product-name">База данных форума</div>
+                        <div class="product-desc">Дамп базы данных (SQL format). Логины, почты, хэши паролей. Старый проект.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">80 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+                <div class="product-card" data-cat="databases">
+                    <div>
+                        <div class="product-name">Физ. лица РФ (Почты/Телефоны)</div>
+                        <div class="product-desc">Свежий слив интернет-магазина. Идеально подходит под рассылки и спам.</div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">110 $</div>
+                        <a href="https://t.me/zerodayTG" target="_blank" class="order-btn">Купить</a>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>Для покупки товара обращаться напрямую к оператору в Telegram: <a href="https://t.me/zerodayTG" target="_blank">@zerodayTG</a></p>
+        <p style="margin-top: 8px; font-size: 11px;">Перед покупкой сверяйте юзернейм. Сторонних ботов и каналов нет.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuLinks = document.querySelectorAll('.menu-link');
+            const products = document.querySelectorAll('.product-card');
+            const catalogTitle = document.getElementById('catalog-title');
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    menuLinks.forEach(item => item.classList.remove('active'));
+                    link.classList.add('active');
+
+                    const selectedCategory = link.getAttribute('data-category');
+                    
+                    catalogTitle.textContent = link.textContent;
+
+                    products.forEach(product => {
+                        const productCategory = product.getAttribute('data-cat');
+                        
+                        if (selectedCategory === 'all' || productCategory === selectedCategory) {
+                            product.classList.remove('hidden');
+                        } else {
+                            product.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
